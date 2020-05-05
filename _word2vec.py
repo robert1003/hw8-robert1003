@@ -1,3 +1,4 @@
+import sys
 import numpy as np
 import json
 
@@ -7,12 +8,12 @@ class Word2Vec:
         self._loadEmbedding(embedding_file)
         
     def _loadEmbedding(self, embedding_file):
-        print('Loading processed embedding...')
+        print('Loading processed embedding...', file=sys.stderr)
         with open(embedding_file.format('word2int'), 'r') as f:
             self.word2idx = json.load(f)
         with open(embedding_file.format('int2word'), 'r') as f:
             self.idx2word = {int(k): v for k, v in json.load(f).items()}
-        print('done')
+        print('done', file=sys.stderr)
         
     def _pad_sent(self, sent, sent_len):        
         if len(sent) > sent_len:
@@ -39,8 +40,8 @@ class Word2Vec:
             
             word_idx = self._pad_sent(word_idx, sent_len)
             sent_list.append(word_idx)
-        print('#{} of sents processed'.format(len(sent_list)))
-        print('#{} of unknown words'.format(unk_cnt))
+        print('#{} of sents processed'.format(len(sent_list)), file=sys.stderr)
+        print('#{} of unknown words'.format(unk_cnt), file=sys.stderr)
         return np.vstack(sent_list)
     
     def idx2sent(self, sents):

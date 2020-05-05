@@ -1,7 +1,7 @@
 # setup environment
-import os
-os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
-os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+#import os
+#os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
+#os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 # import packages
 import torch
@@ -35,13 +35,14 @@ args = {
 }
 args = argparse.Namespace(**args)
 
+'''
 # set random seed
 random.seed(1003)
 np.random.seed(1003)
 torch.manual_seed(1003)
 torch.cuda.manual_seed_all(1003)
 torch.backends.cudnn.deterministic = True
-
+'''
 # word2vec
 en, cn = Word2Vec(os.path.join(args.dir, '{}_en.json')), Word2Vec(os.path.join(args.dir, '{}_cn.json'))
 

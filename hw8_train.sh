@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 1 ]; then
-  echo -e "usage:\tbash hw8_best.sh [input_directory]"
+  echo -e "usage:\tbash hw8_train.sh [input_directory]"
   exit
 fi
 
