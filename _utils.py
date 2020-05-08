@@ -39,7 +39,8 @@ def cut_token(sentence):
         elif token == '<UNK>' or token.isdigit() or len(bytes(token[0], encoding='utf-8')) == 1:
             tmp.append(token)
         else:
-            tmp += [word for word in token]
+            tmp.append(token)
+            #tmp += [word for word in token]
     return tmp 
 
 def bleu(sentences, targets):
