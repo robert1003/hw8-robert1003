@@ -24,10 +24,11 @@ from _utils import read_data, bleu, schedule_sampling, timeSince, train, evaluat
 args = {
     'device': 'cuda',
     'dir': sys.argv[1],
+    'output_name': sys.argv[2],
     'len_X': 40,
     'len_Y': 30,
     'BATCH_SIZE': 64,
-    'model_name': sys.argv[2],
+    'model_name': sys.argv[3],
 }
 args = argparse.Namespace(**args)
 
@@ -118,6 +119,9 @@ for i, (x, y) in enumerate(test_loader):
     true.append(y.detach().cpu().numpy())
     print('predicting: {}/{}'.format(i + 1, tot), end='\r', file=sys.stderr)
 print('', file=sys.stderr)
-predict = [''.join(cut_token(pred)) for pred in cn.idx2sent(np.vstack(predict))]
-for pred in predict:
-    print(pred)
+predict = [' '.join(cut_token(pred)) for pred in cn.idx2sent(np.vstack(predict))]
+
+# print to file
+with open(args.output_name, 'w') as f:
+    for pred in predict:
+        print(pred, file=f)
